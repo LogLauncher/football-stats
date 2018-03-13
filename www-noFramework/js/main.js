@@ -1,13 +1,20 @@
+const initFilterNbGoals = 1500
+let currentChart
+let data
+
 $(document).ready(function() {
-    let data = Papa.parse(footballData, {
+    data = Papa.parse(footballData, {
         header: true,
         dynamicTyping: true,
         skipEmptyLines: true
     })["data"];
 
-    console.log("CSV data after papaparse", data);
+    let filteredData = filterNbGoals(sortByGoals(getGoalsPerTeam()), initFilterNbGoals)
+    createBarChart('total goals', getTeamNames(filteredData), getTeamGoals(filteredData))
     
-    
+})
+
+function getGoalsPerTeam() {
     let goalsPerTeam = []
     data.forEach(row => {
         let homeTeamName = row.home_team
@@ -19,22 +26,46 @@ $(document).ready(function() {
             goalsPerTeam.push(addNewTeam(awayTeamName))         
         }
 
-        addScore(goalsPerTeam, homeTeamName, row.home_score)
-        addScore(goalsPerTeam, awayTeamName, row.away_score)
+        addGoals(goalsPerTeam, homeTeamName, row.home_score)
+        addGoals(goalsPerTeam, awayTeamName, row.away_score)
     })
+    return goalsPerTeam
+}
 
-    let ctx = $('#myChart');
-    let myChart = new Chart(ctx, {
+function createBarChart(dataLabel, labels, data) {
+    if(currentChart) 
+        currentChart.destroy()
+    let ctx = $('#myChart')
+    let myChart = currentChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: getTeamNames(goalsPerTeam),
+            labels: labels,
             datasets: [{
-                label: 'total goals',
-                data: getTeamScores(goalsPerTeam)
+                label: dataLabel,
+                data: data,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
             }]
         }
     })
-})
+}
+
+function sortByGoals(data) {
+    return data.sort(function(a,b) {
+        if (a.goals < b.goals)
+            return 1
+        if (a.goals > b.goals)
+            return -1
+        return 0
+    })
+}
+
+function filterNbGoals(data, nbGoals) {
+    return data.filter(function(team) {
+        return team.goals > nbGoals
+    })
+}
 
 function getTeamNames(teams) {
     let names = []
@@ -44,12 +75,12 @@ function getTeamNames(teams) {
     return names
 }
 
-function getTeamScores(teams) {
-    let scores = []
+function getTeamGoals(teams) {
+    let goals = []
     teams.forEach(team => {
-        scores.push(team.score)
+        goals.push(team.goals)
     })
-    return scores
+    return goals
 }
 
 function containesTeam(teams, name) {
@@ -60,12 +91,12 @@ function containesTeam(teams, name) {
 }
 
 function addNewTeam(name) {
-    return {name: name, score: 0}
+    return {name: name, goals: 0}
 }
 
-function addScore(teams, name, score) {
+function addGoals(teams, name, goals) {
     let team = ($.grep(teams, function(team) {
         return team.name == name
     }))[0]
-    team.score += score
+    team.goals += goals
 }

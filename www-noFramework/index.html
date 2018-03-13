@@ -5,16 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Football stats</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Raleway', sans-serif;
+        }
+    </style>
+
 </head>
 <body>
 
-    <h1>Footbal statistics</h1>
-    <canvas id="myChart" width="400" height="200"></canvas>
+    <h1>Football statistics</h1>
+    <label for="chart-filter">Minimum nb goals: </label>
+    <input id="chart-filter" name="chart-filter" type="number"/>
+    <div style="width:50%;height:50%">
+        <canvas id="myChart"></canvas>
+    </div>
 
     <script src="./libs/chart.bundle.min.js"></script>
     <script src="./libs/jquery.min.js"></script>
     <script src="./libs/papaparse.min.js"></script>
     <script src="./js/football-data.js"></script>
+    <script src="./js/eventsforinputs.js"></script>
     <script src="./js/main.js"></script>
 </body>
 </html>
