@@ -12,7 +12,8 @@ $(document).ready(function() {
 
     let teams = getTeamNames(sortByTeam(getGoalsPerTeam()))
     teams.forEach(team => {
-        $('#chart-selectTeam').append('<option value="'+team+'">'+team+'</option>')
+        $('#chart-selectTeamEvo').append('<option value="'+team+'">'+team+'</option>')
+        $('#chart-selectTeamNb').append('<option value="'+team+'">'+team+'</option>')
     });
 
     nbGoalsPerTeamID = "#chart-nbGoalsPerTeam"
@@ -165,7 +166,7 @@ function sortByGoals(data, order = "asc") {
     })
 }
 
-function filterNbGoals(data, nbGoals) {
+function filterNbGoals(data, nbGoals = 0) {
     return data.filter(function(team) {
         return team.goals > nbGoals
     })
