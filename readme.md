@@ -4,6 +4,7 @@ Various statistics related to football
 - Total goals per team (bar)
   - Sort goals or name
   - Top X number of teams 
+  - Filter >= X number of goals
 - Evolution of goals per team (point/line)
   - Select one team
   - (Add multiple teams to the graph)

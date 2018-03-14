@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,19 +10,98 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 
     <style>
-        * {
+        body {
             font-family: 'Raleway', sans-serif;
+        }
+
+        .thin {
+            font-weight: 100;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        h1 {
+            font-size: 44px;
+            font-weight: 200;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        h2 {
+            font-size: 33px;
+            font-weight: 300;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        h3 {
+            font-size: 22px;
+            font-weight: 700;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        h4,
+        h5 {
+            font-weight: 800;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .bold,
+        strong {
+            font-weight: 600;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .extrabold {
+            font-weight: 800;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .ultrabold {
+            font-weight: 900;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        #container {
+            width: 50%;
+            margin: auto;
+        }
+
+        .chart-group {
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            padding: 2px 16px;
+            margin-bottom: 50px;
         }
     </style>
 
 </head>
+
 <body>
 
-    <h1>Football statistics</h1>
-    <label for="chart-filter">Minimum nb goals: </label>
-    <input id="chart-filter" name="chart-filter" type="number"/>
-    <div style="width:50%;height:50%">
-        <canvas id="myChart"></canvas>
+    <div id="container">
+        <h1>Football statistics</h1>
+        <div class="chart-group">
+            <h3>Number of goals per team</h3>
+            <div class="inputs">
+                <label>Sort by: </label>
+                <input id="chart-sortGoals" type="radio" name="sort" value="goals" checked/> <label for="chart-sortGoals">goals</label>
+                <input id="chart-sortTeams" type="radio" name="sort" value="team"/> <label for="chart-sortTeams">team</label>
+                |
+                <label for="chart-filterTop">Top teams: </label>
+                <input id="chart-filterTop" type="number" name="filterTop"/>
+                |
+                <label for="chart-filterMinGoals">Minimum nb goals: </label>
+                <input id="chart-filterMinGoals" type="number" name="filterMinGoals"/>
+            </div>
+            <canvas id="chart-nbGoalsPerTeam"></canvas>
+        </div>
+        <div class="chart-group">
+                <h3>Evolution of goals per team</h3>
+                <div class="inputs">
+                    <label>Select team: </label>
+                    <select id="chart-selectTeam">
+                        <option value="0">--None--</option>
+                    </select>
+                </div>
+                <canvas id="chart-EvolutionGoalsPerTeam"></canvas>
+            </div>
     </div>
 
     <script src="./libs/chart.bundle.min.js"></script>
@@ -31,4 +111,5 @@
     <script src="./js/eventsforinputs.js"></script>
     <script src="./js/main.js"></script>
 </body>
+
 </html>
