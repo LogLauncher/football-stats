@@ -5,12 +5,9 @@ Various statistics related to football
   - Sort goals or name
   - Top X number of teams 
   - Filter >= X number of goals
-- Evolution of goals per team (point/line)
+- Evolution of goals/matches per team (point/line)
   - Select one team
   - (Add multiple teams to the graph)
-- Nombre of matches played by a team
-  - Per month (point/line or bar)
-  - Per year (point/line)
 - Type of tournament per team (bar)
   - Select one team
   - (Add multiple teams to the graph)

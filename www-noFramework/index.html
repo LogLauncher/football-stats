@@ -9,68 +9,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap.min.css">
-
-    <style>
-        body {
-            font-family: 'Raleway', sans-serif;
-        }
-
-        .thin {
-            font-weight: 100;
-            font-family: 'Raleway', sans-serif;
-        }
-
-        h1 {
-            font-size: 44px;
-            font-weight: 200;
-            font-family: 'Raleway', sans-serif;
-        }
-
-        h2 {
-            font-size: 33px;
-            font-weight: 300;
-            font-family: 'Raleway', sans-serif;
-        }
-
-        h3 {
-            font-size: 22px;
-            font-weight: 700;
-            font-family: 'Raleway', sans-serif;
-        }
-
-        h4,
-        h5 {
-            font-weight: 800;
-            font-family: 'Raleway', sans-serif;
-        }
-
-        .bold,
-        strong {
-            font-weight: 600;
-            font-family: 'Raleway', sans-serif;
-        }
-
-        .extrabold {
-            font-weight: 800;
-            font-family: 'Raleway', sans-serif;
-        }
-
-        .ultrabold {
-            font-weight: 900;
-            font-family: 'Raleway', sans-serif;
-        }
-
-        #container {
-            width: 50%;
-            margin: auto;
-        }
-
-        .chart-group {
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-            padding: 2px 16px;
-            margin-bottom: 50px;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/main.css">
 
 </head>
 
@@ -89,25 +28,43 @@
                 <input id="chart-filterTop" type="number" name="filterTop"/>
                 | -->
                 <label for="chart-filterMinGoals">Minimum nb goals: </label>
-                <input id="chart-filterMinGoals" type="number" name="filterMinGoals"/>
-                |
+                <input id="chart-filterMinGoals" type="number" name="filterMinGoals" /> |
                 <label for=chart-teamName>Team name: </label>
-                <select id="chart-selectTeamNb">
+                <select class="chart-selectTeam" id="chart-selectGoals">
                     <option value="0">--None--</option>
                 </select>
             </div>
             <canvas id="chart-nbGoalsPerTeam"></canvas>
         </div>
         <div class="chart-group">
-                <h3>Evolution of goals per team</h3>
-                <div class="inputs">
-                    <label>Select team: </label>
-                    <select id="chart-selectTeamEvo">
-                        <option value="0">--None--</option>
-                    </select>
-                </div>
-                <canvas id="chart-EvolutionGoalsPerTeam"></canvas>
+            <h3>Evolution of goals per team</h3>
+            <div class="inputs">
+                <label>Select team: </label>
+                <select class="chart-selectTeam" id="chart-selectEvo">
+                    <option value="0">--None--</option>
+                </select>
             </div>
+            <canvas id="chart-evolGoalsPerTeam"></canvas>
+        </div>
+        <div class="chart-group">
+            <h3>Type of tournament per team</h3>
+            <div class="inputs">
+                <label>Select team: </label>
+                <select class="chart-selectTeam" id="chart-selectType">
+                    <option value="0">--None--</option>
+                </select>
+            </div>
+            <canvas id="chart-typeTournamentPerTeam"></canvas>
+        </div><div class="chart-group">
+            <h3>Sum countries played in</h3>
+            <div class="inputs">
+                <label>Select team: </label>
+                <select class="chart-selectTeam" id="chart-selectCountries">
+                    <option value="0">--None--</option>
+                </select>
+            </div>
+            <canvas id="chart-countriesPlayedIn"></canvas>
+        </div>
     </div>
 
     <script src="./libs/chart.bundle.min.js"></script>
