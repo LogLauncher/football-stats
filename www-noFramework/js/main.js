@@ -19,7 +19,7 @@ $(document).ready(function() {
     typeTournamentPerTeamID = "#chart-typeTournamentPerTeam"
     countriesPlayedInID = "#chart-countriesPlayedIn"
 
-    let filteredData = filterNbGoals(sortByGoals(getGoalsPerTeam()))
+    let filteredData = filterNbGoals(sortByGoals(getGoalsPerTeam()), 1000)
     createGoalsPerTeamChart('total goals', getTeamNames(filteredData), getTeamGoals(filteredData))
 })
 
@@ -72,13 +72,28 @@ function getTypeTournamentPerTeam() {
         if(!containesTeam(typeTournamentPerTeam, awayTeamName)) {
             typeTournamentPerTeam.push(addNewTeam(awayTeamName))         
         }
+
         addTournamentType(typeTournamentPerTeam, homeTeamName, row.tournament)
         addTournamentType(typeTournamentPerTeam, awayTeamName, row.tournament)
     })
     return typeTournamentPerTeam
 }
 function getCountriesPlayedIn() {
-    
+    let countriesPlayedIn = []
+    data.forEach(row => {
+        let homeTeamName = row.home_team
+        let awayTeamName = row.away_team
+        if(!containesTeam(countriesPlayedIn, homeTeamName)) {
+            countriesPlayedIn.push(addNewTeam(homeTeamName))
+        }
+        if(!containesTeam(countriesPlayedIn, awayTeamName)) {
+            countriesPlayedIn.push(addNewTeam(awayTeamName))         
+        }
+
+        addCountriesPlayedIn(countriesPlayedIn, homeTeamName, row.country)
+        addCountriesPlayedIn(countriesPlayedIn, awayTeamName, row.country)
+    })
+    return countriesPlayedIn
 }
 
 function createGoalsPerTeamChart(dataLabel, labels, data) {
@@ -152,6 +167,23 @@ function createTypeTournamentPerTeamChart(dataLabel, labels, data) {
         }
     })
 }
+function createCountriesPlayedInChart(dataLabel, labels, data) {
+    destroyChart(countriesPlayedInChart);
+    let ctx = $(countriesPlayedInID)
+    countriesPlayedInChart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: dataLabel,
+                data: data,
+                backgroundColor: 'rgba(38, 166, 91, 0.2)',
+                borderColor: 'rgba(38, 166, 91, 1)',
+                borderWidth: 1
+            }]
+        }
+    })
+}
 
 function sortByTeam(data, order = "asc") {
     return data.sort(function(a,b) {
@@ -201,7 +233,32 @@ function sortByGoals(data, order = "asc") {
 }
 function sortByTournamentCount(data, order = "asc") {
     return Object.keys(data).sort(function(a,b) {
-        return data[b]-data[a]
+        switch (order) {
+            case "asc":
+                return data[b]-data[a]
+                break;
+            case "desc":
+                return data[a]-data[b]
+                break;
+            default:
+                return null
+                break;
+        }
+    })
+}
+function sortByCountryCount(data, order = "asc") {
+    return Object.keys(data).sort(function(a,b) {
+        switch (order) {
+            case "asc":
+                return data[b]-data[a]
+                break;
+            case "desc":
+                return data[a]-data[b]
+                break;
+            default:
+                return null
+                break;
+        }
     })
 }
 
@@ -264,6 +321,14 @@ function getTournamentTypeCount(team, order) {
     }
     return tournamentCount
 }
+function getCountryCount(team, order) {
+    let countryCount = []
+    let countries = team.countries
+    for (const key in order) {
+        countryCount.push(countries[order[key]])
+    }
+    return countryCount
+}
 
 function containesTeam(teams, name) {
     let team = $.grep(teams, function(team) {
@@ -313,4 +378,16 @@ function addTournamentType(teams, name, type) {
         team.tournaments[type] = 1
     else
         team.tournaments[type] += 1
+}
+function addCountriesPlayedIn(teams, name, country) {
+    let team = ($.grep(teams, function(team) {
+        return team.name == name
+    }))[0]
+    if(team.countries == null)
+        team.countries = {}
+
+    if(team.countries[country] == null)
+        team.countries[country] = 1
+    else
+        team.countries[country] += 1
 }

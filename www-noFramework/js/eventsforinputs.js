@@ -30,4 +30,11 @@ $(document).ready(function() {
         let keysInOrder = sortByTournamentCount(data.tournaments)
         createTypeTournamentPerTeamChart('number of tournaments', keysInOrder, getTournamentTypeCount(data, keysInOrder))
     })
+
+    $("#chart-selectCountries").change(function() {
+        let data = getCountriesPlayedIn()
+        data = getTeam(data, $("#chart-selectCountries").val())
+        let keysInOrder = sortByCountryCount(data.countries)
+        createCountriesPlayedInChart('countries played in', keysInOrder, getCountryCount(data, keysInOrder))
+    })
 })
