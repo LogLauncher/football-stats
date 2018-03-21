@@ -17,53 +17,70 @@
 
     <div id="container">
         <h1>Football statistics</h1>
-        <div class="chart-group">
-            <h3>Number of goals per team</h3>
-            <div class="inputs">
-                <!-- <label>Sort by: </label>
-                <input id="chart-sortGoals" type="radio" name="sort" value="goals" checked/> <label for="chart-sortGoals">goals</label>
-                <input id="chart-sortTeams" type="radio" name="sort" value="team"/> <label for="chart-sortTeams">team</label>
-                |
-                <label for="chart-filterTop">Top teams: </label>
-                <input id="chart-filterTop" type="number" name="filterTop"/>
-                | -->
-                <label for="chart-filterMinGoals">Minimum nb goals: </label>
-                <input id="chart-filterMinGoals" type="number" name="filterMinGoals" /> |
-                <label for=chart-teamName>Team name: </label>
-                <select class="chart-selectTeam" id="chart-selectGoals">
-                    <option value="0">--None--</option>
-                </select>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="chart-group">
+                    <h3>Number of goals per team</h3>
+                    <hr/>
+                    <div class="inputs">
+                        <!-- <label>Sort by: </label>
+                        <input id="chart-sortGoals" type="radio" name="sort" value="goals" checked/> <label for="chart-sortGoals">goals</label>
+                        <input id="chart-sortTeams" type="radio" name="sort" value="team"/> <label for="chart-sortTeams">team</label>
+                        |
+                        <label for="chart-filterTop">Top teams: </label>
+                        <input id="chart-filterTop" type="number" name="filterTop"/>
+                        | -->
+                        <label for="chart-filterMinGoals">Minimum nb goals: </label>
+                        <input id="chart-filterMinGoals" type="number" name="filterMinGoals" /> |
+                        <label for=chart-teamName>Team name: </label>
+                        <select class="chart-selectTeam" id="chart-selectGoals">
+                            <option value="0">--None--</option>
+                        </select>
+                    </div>
+                    <canvas id="chart-nbGoalsPerTeam"></canvas>
+                </div>
             </div>
-            <canvas id="chart-nbGoalsPerTeam"></canvas>
+            <div class="col-lg-6">
+                <div class="chart-group">
+                    <h3>Evolution of goals per team</h3>
+                    <hr/>
+                    <div class="inputs">
+                        <label>Select team: </label>
+                        <select class="chart-selectTeam" id="chart-selectEvo">
+                            <option value="0">--None--</option>
+                        </select>
+                    </div>
+                    <canvas id="chart-evolGoalsPerTeam"></canvas>
+                </div>
+            </div>
         </div>
-        <div class="chart-group">
-            <h3>Evolution of goals per team</h3>
-            <div class="inputs">
-                <label>Select team: </label>
-                <select class="chart-selectTeam" id="chart-selectEvo">
-                    <option value="0">--None--</option>
-                </select>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="chart-group">
+                    <h3>Type of tournament per team</h3>
+                    <hr/>
+                    <div class="inputs">
+                        <label>Select team: </label>
+                        <select class="chart-selectTeam" id="chart-selectType">
+                            <option value="0">--None--</option>
+                        </select>
+                    </div>
+                    <canvas id="chart-typeTournamentPerTeam"></canvas>
+                </div>       
             </div>
-            <canvas id="chart-evolGoalsPerTeam"></canvas>
-        </div>
-        <div class="chart-group">
-            <h3>Type of tournament per team</h3>
-            <div class="inputs">
-                <label>Select team: </label>
-                <select class="chart-selectTeam" id="chart-selectType">
-                    <option value="0">--None--</option>
-                </select>
-            </div>
-            <canvas id="chart-typeTournamentPerTeam"></canvas>
-        </div><div class="chart-group">
-            <h3>Sum countries played in</h3>
-            <div class="inputs">
-                <label>Select team: </label>
-                <select class="chart-selectTeam" id="chart-selectCountries">
-                    <option value="0">--None--</option>
-                </select>
-            </div>
-            <canvas id="chart-countriesPlayedIn"></canvas>
+            <div class="col-lg-6">
+                <div class="chart-group">
+                    <h3>Sum countries played in</h3>
+                    <hr/>
+                    <div class="inputs">
+                        <label>Select team: </label>
+                        <select class="chart-selectTeam" id="chart-selectCountries">
+                            <option value="0">--None--</option>
+                        </select>
+                    </div>
+                    <canvas id="chart-countriesPlayedIn"></canvas>
+                </div>
+            </div>    
         </div>
     </div>
 
@@ -74,6 +91,7 @@
     <script src="./js/football-data.js"></script>
     <script src="./js/eventsforinputs.js"></script>
     <script src="./js/main.js"></script>
+
 </body>
 
 </html>

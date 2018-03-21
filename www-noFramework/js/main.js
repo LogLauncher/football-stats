@@ -20,7 +20,7 @@ $(document).ready(function() {
     countriesPlayedInID = "#chart-countriesPlayedIn"
 
     let filteredData = filterNbGoals(sortByGoals(getGoalsPerTeam()), 1000)
-    createGoalsPerTeamChart('total goals', getTeamNames(filteredData), getTeamGoals(filteredData))
+    createGoalsPerTeamChart('# Goals', getTeamNames(filteredData), getTeamGoals(filteredData))
 })
 
 function destroyChart(chart) {
@@ -98,6 +98,17 @@ function getCountriesPlayedIn() {
 
 function createGoalsPerTeamChart(dataLabel, labels, data) {
     destroyChart(nbGoalsPerTeamChart);
+
+    let backgroundColor = []
+    let boarderColor = []
+    labels.forEach(e => {
+        let r = randomInt(0,255)
+        let g = randomInt(0,255)
+        let b = randomInt(0,255)
+        backgroundColor.push(`rgba(${r},${g},${b},0.2)`)
+        boarderColor.push(`rgba(${r},${g},${b},1)`)
+    })
+
     let ctx = $(nbGoalsPerTeamID)
     nbGoalsPerTeamChart = new Chart(ctx, {
         type: 'horizontalBar',
@@ -106,10 +117,19 @@ function createGoalsPerTeamChart(dataLabel, labels, data) {
             datasets: [{
                 label: dataLabel,
                 data: data,
-                backgroundColor: 'rgba(38, 166, 91, 0.2)',
-                borderColor: 'rgba(38, 166, 91, 1)',
+                backgroundColor: backgroundColor,
+                borderColor: boarderColor,
                 borderWidth: 1
             }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
         }
     })
 }
@@ -147,6 +167,13 @@ function createEvolGoalsPerTeamChart(dataLabel1, dataLabel2, labels, data1, data
                 mode: 'nearest',
                 intersect: true
             },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
         }
     })
 }
@@ -390,4 +417,8 @@ function addCountriesPlayedIn(teams, name, country) {
         team.countries[country] = 1
     else
         team.countries[country] += 1
+}
+
+function randomInt(min,max) {
+    return Math.floor(Math.random()*(max-min+1)+min);
 }
